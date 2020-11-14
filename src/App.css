@@ -1,0 +1,45 @@
+#App {
+  text-align: center;
+  background-color: #e7e6e6;
+}
+
+#login-signup-card{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  
+  #login-card{
+    display: block;
+  }
+
+}
+
+#loading-logo {
+  height: 300px;
+  width:250px;
+  animation: loader 6s infinite ease-in-out;
+}
+
+@keyframes loader {
+	0% {
+		transform: perspective(220px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+		transform: perspective(220px) rotateX(0deg) rotateY(-179.9deg);
+	}
+	50% {
+		transform: perspective(220px) rotateX(0deg) rotateY(0deg);
+  }
+  75% {
+		transform: perspective(220px) rotateX(0deg) rotateY(-179.9deg);
+	}
+	100% {
+		transform: perspective(220px) rotateX(0deg) rotateY(0deg);
+	}
+}
