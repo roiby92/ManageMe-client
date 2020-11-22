@@ -1,4 +1,4 @@
-import { Grid, List, makeStyles, Snackbar, Typography } from '@material-ui/core'
+import { Grid, makeStyles} from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
 import React, { useState, useEffect  } from 'react'
 

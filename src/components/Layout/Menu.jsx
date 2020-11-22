@@ -14,7 +14,6 @@ import {
   Toolbar,
   Typography,
   Grid,
-  Paper,
   Avatar
 } from '@material-ui/core'
 import {
