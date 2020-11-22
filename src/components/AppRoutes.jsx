@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import React, { Fragment } from 'react'
-import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
+import {Redirect, Route } from 'react-router-dom'
 import Login from './auth/Login'
 import Signup from './auth/Signup'
 import Container from './Layout/Container'

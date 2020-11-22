@@ -1,7 +1,6 @@
-import { Grid, List, ListItem, Divider, ListItemText, TextField, makeStyles, Snackbar, Typography } from '@material-ui/core'
-import { Alert } from '@material-ui/lab';
+import { Grid, makeStyles } from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import StripeCheckout from 'react-stripe-checkout';
 
 
