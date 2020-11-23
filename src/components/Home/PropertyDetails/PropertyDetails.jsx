@@ -37,16 +37,16 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         display: 'grid',
         gridTemplateColumns: '60% 40%',
-        gridGap: '10px'
+        gridGap: '10px',
     },
     img: {
-        width: '100%',
-        height: '100%',
+        width: '150px',
+        height: '100px',
         borderRadius: '5px',
         boxShadow: '0px 0px 3px black',
         [theme.breakpoints.up('md')]: {
-            width: '220px',
-            height: '100%'
+            width: '150px',
+            height: '100px'
         },
     },
     deleteButton: {

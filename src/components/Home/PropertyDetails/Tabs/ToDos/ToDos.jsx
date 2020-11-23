@@ -14,7 +14,7 @@ import { Alert } from '@material-ui/lab'
 
 const useStyles = makeStyles((theme) => ({
     cardDetails: {
-        height: '58vh',
+        height: '55vh',
         paddingBottom: 10,
         paddingRight: 5,
         overflow: 'scroll',

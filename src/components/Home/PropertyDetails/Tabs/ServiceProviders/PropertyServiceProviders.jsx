@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold'
     },
     serviceProvidersTable: {
-        height: '48vh',
+        height: '45vh',
         paddingBottom: 10,
         paddingRight: 5,
         overflow: 'scroll',
