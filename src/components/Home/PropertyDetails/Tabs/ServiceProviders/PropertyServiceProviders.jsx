@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
     },
     tableTitles: {
         fontWeight: 'bold'
+    },
+    serviceProvidersTable: {
+        height: 360,
+        padding: 10,
+        overflow: 'scroll'  
     }
 }))
 
@@ -120,16 +125,18 @@ const PropertyServiceProviders = inject('user')(observer((props) => {
                         </Typography>
                     </Grid>
                 </Grid>
-                {serviceProviders
-                    .map(p => 
-                        <ServiceProvidersRow 
-                            key={p.id} 
-                            serviceProvider={p} 
-                            rowType={1}
-                            handleDelete={handleDelete}
-                        />
-                    )
-                }
+                <Grid item xs={12} className={classes.serviceProvidersTable}>
+                    {serviceProviders
+                        .map(p => 
+                            <ServiceProvidersRow 
+                                key={p.id} 
+                                serviceProvider={p} 
+                                rowType={1}
+                                handleDelete={handleDelete}
+                            />
+                        )
+                    }
+                </Grid>
             </Hidden>
             <NewServiceProvider 
                 open={openNew} 

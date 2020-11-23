@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             marginLeft: 40
         },
-        height: '100%'
+        height: '82vh'
     },
     cardHead: {
         marginBottom: '10px',
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '0.7em'
     },
     cardDetails: {
-        marginTop: '15px'
+        marginTop: '15px',
     },
     detailsContainer: {
         marginBottom: '10px'

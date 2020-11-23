@@ -20,6 +20,11 @@ const useStyles = makeStyles((theme) => ({
       color: '#fb8500',
       marginLeft: '10px',
       fontSize: '0.7em'
+  },
+  todosList: {
+    height: 360,
+    padding: 10,
+    overflow: 'scroll'  
   }
 }))
 
@@ -59,7 +64,9 @@ const ToDos = inject('user')(observer((props) => {
                 </Typography>
                 <Button className={classes.addButton} onClick={handleOpenNewTask}>NEW TASK</Button> 
             </Grid>
-            {toDos.map(t => <ToDo key={t.id} task={t} property={property} handleDelete={handleDelete}/>)}
+            <Grid item xs={12} className={classes.todosList}>
+                {toDos.map(t => <ToDo key={t.id} task={t} property={property} handleDelete={handleDelete}/>)}
+            </Grid>
             <NewToDo 
                 open={openNew} 
                 handleClose={handleClose}
