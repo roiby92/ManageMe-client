@@ -13,19 +13,20 @@ import { Alert } from '@material-ui/lab'
 
 
 const useStyles = makeStyles((theme) => ({
-  cardDetails: {
-    marginTop: '15px'
-  },
-  addButton: {
-      color: '#fb8500',
-      marginLeft: '10px',
-      fontSize: '0.7em'
-  },
-  todosList: {
-    height: 360,
-    padding: 10,
-    overflow: 'scroll'  
-  }
+    cardDetails: {
+        height: '58vh',
+        paddingBottom: 10,
+        paddingRight: 5,
+        overflow: 'scroll',
+        [theme.breakpoints.up('md')]: {
+            padding: 10,
+        }
+    },
+    addButton: {
+        color: '#fb8500',
+        marginLeft: '10px',
+        fontSize: '0.7em'
+    }
 }))
 
 const ToDos = inject('user')(observer((props) => {  
@@ -57,16 +58,14 @@ const ToDos = inject('user')(observer((props) => {
     }
 
     return (
-        <Fragment>
+        <Grid item xs={12} className={classes.cardDetails}>
             <Grid item xs={12} container direction='row' >
                <Typography variant='h6'>
                     Open tasks 
                 </Typography>
                 <Button className={classes.addButton} onClick={handleOpenNewTask}>NEW TASK</Button> 
             </Grid>
-            <Grid item xs={12} className={classes.todosList}>
-                {toDos.map(t => <ToDo key={t.id} task={t} property={property} handleDelete={handleDelete}/>)}
-            </Grid>
+            {toDos.map(t => <ToDo key={t.id} task={t} property={property} handleDelete={handleDelete}/>)}
             <NewToDo 
                 open={openNew} 
                 handleClose={handleClose}
@@ -83,7 +82,7 @@ const ToDos = inject('user')(observer((props) => {
                     Task has been succssefully deleted from todo list
                 </Alert>
             </Snackbar>
-        </Fragment>
+        </Grid>
     )
 }))
 

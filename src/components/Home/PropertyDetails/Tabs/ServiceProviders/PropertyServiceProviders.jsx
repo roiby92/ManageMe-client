@@ -19,9 +19,13 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold'
     },
     serviceProvidersTable: {
-        height: 360,
-        padding: 10,
-        overflow: 'scroll'  
+        height: '48vh',
+        paddingBottom: 10,
+        paddingRight: 5,
+        overflow: 'scroll',
+        [theme.breakpoints.up('md')]: {
+            padding: 10,
+        }
     }
 }))
 
@@ -78,16 +82,18 @@ const PropertyServiceProviders = inject('user')(observer((props) => {
             </Grid>
             <CssBaseline />
             <Hidden mdUp implementation="css">
-                {serviceProviders
-                    .map(p => 
-                        <ServiceProvidersRow 
-                            key={p.id} 
-                            serviceProvider={p} 
-                            rowType={0}
-                            handleDelete={handleDelete}
-                        />
-                    )
-                } 
+                <Grid item xs={12} className={classes.serviceProvidersTable}>
+                    {serviceProviders
+                        .map(p => 
+                            <ServiceProvidersRow 
+                                key={p.id} 
+                                serviceProvider={p} 
+                                rowType={0}
+                                handleDelete={handleDelete}
+                            />
+                        )
+                    } 
+                </Grid>
             </Hidden>
             <Hidden smDown implementation="css">
             <Grid 

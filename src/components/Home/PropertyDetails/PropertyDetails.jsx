@@ -9,7 +9,8 @@ import {
     Divider,
     Tabs,
     Tab,
-    Button
+    Button,
+    Hidden
 } from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
 import ToDos from './Tabs/ToDos/ToDos';
@@ -23,21 +24,30 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         paddingTop: '5px',
+        overflow: 'scroll',
         [theme.breakpoints.up('md')]: {
-            marginLeft: 40
+            marginLeft: 40,
+            overflow: 'visible',
         },
         height: '82vh'
     },
     cardHead: {
         marginBottom: '10px',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        display: 'grid',
+        gridTemplateColumns: '60% 40%',
+        gridGap: '10px'
     },
     img: {
-        height: '100px',
-        width: '150px',
+        width: '100%',
+        height: '100%',
         borderRadius: '5px',
-        boxShadow: '0px 0px 3px black'
+        boxShadow: '0px 0px 3px black',
+        [theme.breakpoints.up('md')]: {
+            width: '220px',
+            height: '100%'
+        },
     },
     deleteButton: {
         color: '#fb8500',
@@ -84,7 +94,7 @@ const PropertyDetails = inject('user')(observer((props) => {
                 <Card className={classes.root}>
                     <CardContent>
                         <Grid item xs={12} container direction='row' className={classes.cardHead} alignItems='flex-end'> 
-                            <Grid item xs={7}>
+                            <Grid item xs={12}>
                                 <Typography variant='h5'>
                                     {property.name}
                                 </Typography>
@@ -93,30 +103,47 @@ const PropertyDetails = inject('user')(observer((props) => {
                                 </Typography>
                                 <Button className={classes.deleteButton} size='small' onClick={handleDelete}>DELETE PROPERTY</Button> 
                             </Grid> 
-                            <Grid item xs={5} container justify='flex-end'>
+                            <Grid item xs={12} container justify='flex-end'>
                                 <CardMedia
                                     component="img"
-                                    alt="Contemplative Reptile"
+                                    alt={property.name}
                                     className={classes.img}
                                     image={property.img}
-                                    title="Contemplative Reptile"
+                                    title={property.name}
                                 />
                             </Grid>
                         </ Grid>
                         <Divider />
+                        <Hidden mdUp implementation="css">
+                            <Tabs
+                                value={value}
+                                onChange={handleChange}
+                                indicatorColor="primary"
+                                textColor="primary"
+                                variant="scrollable"
+                                aria-label="full width tabs example"
+                            >
+                                <Tab label="Details" {...a11yProps(0)} />
+                                <Tab label="Calendar" {...a11yProps(1)} />
+                                <Tab label="To Dos" {...a11yProps(2)} />
+                                <Tab label="Service Providers" {...a11yProps(3)} />
+                            </Tabs>
+                        </Hidden>
+                        <Hidden smDown implementation="css">
                         <Tabs
-                            value={value}
-                            onChange={handleChange}
-                            indicatorColor="primary"
-                            textColor="primary"
-                            variant="fullWidth"
-                            aria-label="full width tabs example"
-                        >
-                            <Tab label="Details" {...a11yProps(0)} />
-                            <Tab label="Calendar" {...a11yProps(1)} />
-                            <Tab label="To Dos" {...a11yProps(2)} />
-                            <Tab label="Service Providers" {...a11yProps(3)} />
-                        </Tabs>
+                                value={value}
+                                onChange={handleChange}
+                                indicatorColor="primary"
+                                textColor="primary"
+                                variant="fullWidth"
+                                aria-label="full width tabs example"
+                            >
+                                <Tab label="Details" {...a11yProps(0)} />
+                                <Tab label="Calendar" {...a11yProps(1)} />
+                                <Tab label="To Dos" {...a11yProps(2)} />
+                                <Tab label="Service Providers" {...a11yProps(3)} />
+                            </Tabs>
+                        </Hidden>
                         <Grid 
                             hidden={value !== 0}
                             item 
