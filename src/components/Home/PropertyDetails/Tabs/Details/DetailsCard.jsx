@@ -77,10 +77,11 @@ const DetailsCard = inject('user')(observer((props) => {
                 <Typography variant='h6' className={classes.cardTitle}>
                     Details
                 </Typography>
-                {user.type.id === 1 ?
-                <Button className={classes.addButton} onClick={handleOpenEdit}>
-                    EDIT
-                </Button>: null}
+                {user.type.id === 1 
+                &&  <Button className={classes.addButton} onClick={handleOpenEdit}>
+                        EDIT
+                    </Button>
+                }
             </Grid>
             <EditDetails
                 key={property.id}
@@ -90,7 +91,7 @@ const DetailsCard = inject('user')(observer((props) => {
                 property={property}
             />
             <Grid item xs={12} container direction='row' className={classes.detailsContainer}>
-                <Grid item xs={5} >
+                <Grid item xs={12} sm={5}>
                     <Typography variant='subtitle1' className={classes.title}>
                         Property
                     </Typography>
@@ -131,7 +132,7 @@ const DetailsCard = inject('user')(observer((props) => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid item xs={7} >
+                <Grid item xs={12} sm={7}>
                     <Typography variant='subtitle1' className={classes.title}>
                         Owner
                     </Typography>

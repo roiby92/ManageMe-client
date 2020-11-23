@@ -13,21 +13,23 @@ import { Link } from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
-    rootContainer:{
-        marginBottom: '30px',
-    },
+
     root: {
-        maxHeight: '100%',
-        maxWidth: '100%',
+        height: '100%',
+        width: '100%',
         [theme.breakpoints.up('md')]: {
-            marginLeft: 40
+            marginLeft: 10,
         },
     },
     link: {
         textDecoration: 'none'
     },
     cardTitle: {
-        marginBottom: '10px'
+        marginBottom: '10px',
+        fontSize: '1rem'
+    },
+    address: {
+        fontSize: '0.8rem'
     }
 }))
 
@@ -38,7 +40,6 @@ const PropertyCard = inject('user')(observer((props) => {
     const { property } = props
 
     return (
-        <Grid item xs={12} md={4} container className={classes.rootContainer}>
             <Link 
                 to={`/home/properties/${property.id}`} 
                 className={classes.link} 
@@ -63,14 +64,13 @@ const PropertyCard = inject('user')(observer((props) => {
                             >
                                 {property.name}
                             </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
+                            <Typography variant="body2" color="textSecondary" component="p" className={classes.address}>
                                 {property.address}
                             </Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>
             </Link>
-        </Grid>
     )
 }))
 

@@ -17,6 +17,15 @@ const useStyles = makeStyles((theme) => ({
     },
     tableTitles: {
         fontWeight: 'bold'
+    },
+    serviceProvidersTable: {
+        height: '48vh',
+        paddingBottom: 10,
+        paddingRight: 5,
+        overflow: 'scroll',
+        [theme.breakpoints.up('md')]: {
+            padding: 10,
+        }
     }
 }))
 
@@ -73,16 +82,18 @@ const PropertyServiceProviders = inject('user')(observer((props) => {
             </Grid>
             <CssBaseline />
             <Hidden mdUp implementation="css">
-                {serviceProviders
-                    .map(p => 
-                        <ServiceProvidersRow 
-                            key={p.id} 
-                            serviceProvider={p} 
-                            rowType={0}
-                            handleDelete={handleDelete}
-                        />
-                    )
-                } 
+                <Grid item xs={12} className={classes.serviceProvidersTable}>
+                    {serviceProviders
+                        .map(p => 
+                            <ServiceProvidersRow 
+                                key={p.id} 
+                                serviceProvider={p} 
+                                rowType={0}
+                                handleDelete={handleDelete}
+                            />
+                        )
+                    } 
+                </Grid>
             </Hidden>
             <Hidden smDown implementation="css">
             <Grid 
@@ -120,16 +131,18 @@ const PropertyServiceProviders = inject('user')(observer((props) => {
                         </Typography>
                     </Grid>
                 </Grid>
-                {serviceProviders
-                    .map(p => 
-                        <ServiceProvidersRow 
-                            key={p.id} 
-                            serviceProvider={p} 
-                            rowType={1}
-                            handleDelete={handleDelete}
-                        />
-                    )
-                }
+                <Grid item xs={12} className={classes.serviceProvidersTable}>
+                    {serviceProviders
+                        .map(p => 
+                            <ServiceProvidersRow 
+                                key={p.id} 
+                                serviceProvider={p} 
+                                rowType={1}
+                                handleDelete={handleDelete}
+                            />
+                        )
+                    }
+                </Grid>
             </Hidden>
             <NewServiceProvider 
                 open={openNew} 

@@ -13,14 +13,20 @@ import { Alert } from '@material-ui/lab'
 
 
 const useStyles = makeStyles((theme) => ({
-  cardDetails: {
-    marginTop: '15px'
-  },
-  addButton: {
-      color: '#fb8500',
-      marginLeft: '10px',
-      fontSize: '0.7em'
-  }
+    cardDetails: {
+        height: '58vh',
+        paddingBottom: 10,
+        paddingRight: 5,
+        overflow: 'scroll',
+        [theme.breakpoints.up('md')]: {
+            padding: 10,
+        }
+    },
+    addButton: {
+        color: '#fb8500',
+        marginLeft: '10px',
+        fontSize: '0.7em'
+    }
 }))
 
 const ToDos = inject('user')(observer((props) => {  
@@ -52,7 +58,7 @@ const ToDos = inject('user')(observer((props) => {
     }
 
     return (
-        <Fragment>
+        <Grid item xs={12} className={classes.cardDetails}>
             <Grid item xs={12} container direction='row' >
                <Typography variant='h6'>
                     Open tasks 
@@ -76,7 +82,7 @@ const ToDos = inject('user')(observer((props) => {
                     Task has been succssefully deleted from todo list
                 </Alert>
             </Snackbar>
-        </Fragment>
+        </Grid>
     )
 }))
 
