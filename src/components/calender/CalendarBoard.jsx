@@ -6,6 +6,8 @@ import { ViewState, EditingState } from '@devexpress/dx-react-scheduler';
 import {
   Scheduler,
   MonthView,
+  WeekView,
+  DayView,
   AppointmentForm,
   Toolbar,
   DateNavigator,
@@ -41,14 +43,14 @@ const TextEditor = (props) => {
 };
 
 const Calendar = inject('user')(observer((props) => {
-  const { user, fetchBooking, booking } = props
+  const { user, fetchBooking, booking, format } = props
   const classes = useStyles()
   const [addedAppointment, setAddedAppointment] = useState({})
   const [appointmentChanges, setAppointmentChanges] = useState({})
   const [editingAppointment, setEditingAppointment] = useState(undefined)
 
-
   async function commitChanges({ added, changed, deleted }) {
+    console.log({ added, changed, deleted });
     if (added) {
       added.startDate = moment(added.startDate).format('YYYY/MM/DD HH:mm:ss')
       added.endDate = moment(added.endDate).format('YYYY/MM/DD HH:mm:ss')
@@ -68,7 +70,9 @@ const Calendar = inject('user')(observer((props) => {
           bookingToDB[newKey] = changed[key]
         }
       }
+      if(changed.title){
       bookingToDB.name = changed.title === "Booking" ? bookingToDB.name : changed.title
+      }
       await user.updateBooking(id, bookingToDB);
     }
     if (deleted !== undefined) {
@@ -101,7 +105,18 @@ const Calendar = inject('user')(observer((props) => {
           onEditingAppointmentChange={(editingAppointment) => setEditingAppointment(editingAppointment)}
         />
 
-        <MonthView />
+        {format === "month" ?
+        <MonthView /> :
+        format === "week" ?
+        <WeekView
+            startDayHour={8}
+            endDayHour={20}
+          />:
+        <DayView
+          startDayHour={8}
+          endDayHour={20}
+        />}
+
         <Toolbar />
         <DateNavigator />
         <TodayButton />

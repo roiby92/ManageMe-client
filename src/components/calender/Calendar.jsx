@@ -1,4 +1,4 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core'
+import { Grid, makeStyles, Typography, TextField, MenuItem} from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
 import React, { useEffect, useState } from 'react'
 import CalendarBoard from './CalendarBoard'
@@ -18,6 +18,7 @@ const Calendar = inject('user')(observer((props) => {
     const { user } = props
     const classes = useStyles()
     const [booking, setBooking] = useState([])
+    const [format, setFormat] = useState("month")
 
     const fetchBooking = () => {
         const newBooking = []
@@ -27,8 +28,8 @@ const Calendar = inject('user')(observer((props) => {
                 newBooking.push({
                     title: b.channel ? "Booking" : b.name,
                     color: colors[i],
-                    startDate: startDate.substring(0, startDate.length - 8),
-                    endDate: endDate.substring(0, endDate.length - 8),
+                    startDate: startDate.length > 22 ? startDate.substring(0, startDate.length - 8) : startDate,
+                    endDate: endDate.length > 22 ? endDate.substring(0, endDate.length - 8) : endDate,
                     ...b
                 })
             })
@@ -50,10 +51,28 @@ const Calendar = inject('user')(observer((props) => {
                 xs={12}
             >
                 <Typography variant='h5' className={classes.title}>
-                    All properties Schedule
+                    All properties
+                    <TextField
+                        id="format"
+                        select
+                        value={format}
+                        onChange={(e)=> setFormat(e.target.value)}
+                        helperText="Select format"
+                    >
+                        <MenuItem value="month">
+                                monthly
+                        </MenuItem>
+                        <MenuItem value="week">
+                                weekly
+                        </MenuItem>
+                        <MenuItem value="day">
+                                daily
+                        </MenuItem>
+                    </TextField>
+                     Schedule
         </Typography>
             </Grid>
-            <CalendarBoard booking={booking} fetchBooking={fetchBooking} />
+            <CalendarBoard booking={booking} fetchBooking={fetchBooking} format={format} />
         </Grid >
     )
 }))

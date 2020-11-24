@@ -3,7 +3,7 @@ import { AppointmentForm } from '@devexpress/dx-react-scheduler-material-ui';
 import PropertiesDropDown from './PropertiesDropDown'
 
 const BookingForm = ({ onFieldChange, appointmentData, ...restProps }) => {
-
+  
   const onCustomFieldChange = (e) => {
     onFieldChange({ [e.target.name]: e.target.value });
   };
@@ -14,11 +14,11 @@ const BookingForm = ({ onFieldChange, appointmentData, ...restProps }) => {
       onFieldChange={onFieldChange}
       {...restProps}
     >
+      {appointmentData.title === 'Booking' && <>
       <AppointmentForm.Label
         text="Name"
         type="title"
       />
-      {appointmentData.title === 'Booking' && <>
       <AppointmentForm.TextEditor
         value={appointmentData.name}
         name="name"
