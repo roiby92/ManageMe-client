@@ -52,7 +52,7 @@ const Container = inject('user')(observer((props) => {
                     xs={12}
                     className={classes.homeContainer}
                     container
-
+                    alignItems='flex-start'
                 >
                     <Route
                     exact path='/home/properties'

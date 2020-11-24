@@ -92,40 +92,40 @@ const Profile = inject('user')(observer((props) => {
     return (
         <Grid className={classes.profileContainer} item xs={12} container>
             <Typography variant='h5'>
-                Details
+                Personal Information
             </Typography>
 
             <Grid item xs={12} container>
-            <List component="nav" className={classes.fields}>
+                <List component="nav" className={classes.fields}>
 
-                <DetailField
-                    type='Name'
-                    value={user.firstName + " " + user.lastName}
-                    handleClick={handleClickName} />
+                    <DetailField
+                        type='Name'
+                        value={user.firstName + " " + user.lastName}
+                        handleClick={handleClickName} />
 
-                <DetailField
-                    type='Email'
-                    value={user.email}
-                    handleClick={handleClickEmail} />
+                    <DetailField
+                        type='Email'
+                        value={user.email}
+                        handleClick={handleClickEmail} />
 
-                <DetailField
-                    type='Phone'
-                    value={user.phone}
-                    handleClick={handleClickPhone} />
+                    <DetailField
+                        type='Phone'
+                        value={user.phone}
+                        handleClick={handleClickPhone} />
 
-                <DetailField
-                    type='Password'
-                    value='Change password'
-                    handleClick={handleClickPassword} />
+                    <DetailField
+                        type='Password'
+                        value='Change password'
+                        handleClick={handleClickPassword} />
 
-                <DetailField
-                    type='Join Date'
-                    value={moment(user.dateJoin).format('LLL')} />
+                    <DetailField
+                        type='Join Date'
+                        value={moment(user.dateJoin).format('LLL')} />
 
-                <DetailField
-                    type='User Type'
-                    value={user.type ? user.type.type : user.type} />
-            </List>
+                    <DetailField
+                        type='User Type'
+                        value={user.type ? user.type.type : user.type} />
+                </List>
             </Grid>
 
             {genrateForm(openName, setOpenName, [

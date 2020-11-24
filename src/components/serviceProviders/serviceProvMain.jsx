@@ -42,21 +42,29 @@ const ServiceProvMain = inject('user')(observer((props) => {
     const handleType = e => {
         setValue(e.target.value)
         if(e.target.value){
-        setFilterEmployee(user.serviceWorkers.filter(s => s[key].includes(e.target.value)))
+            setFilterEmployee(
+                key === 'type'
+                    ?   user.serviceWorkers.filter(s => 
+                            s[key].type.toLowerCase().includes(e.target.value.toLowerCase())
+                        )
+                    :   user.serviceWorkers.filter(s => 
+                            s[key].toLowerCase().includes(e.target.value.toLowerCase())
+                        )
+            )
         }else{
             setFilterEmployee([...user.serviceWorkers])
         }
     }
 
     return (
-
-        <Grid item
+        <Grid 
+            item
             xs={12}
             container
             className={classes.serviceContainer}
         >
             <Typography variant='h5' className={classes.title}>
-                All properties Schedule
+                Service Providers
             </Typography>
             <Grid item xs={12} container direction='row' className={classes.searchingContainer}>
                 <Grid item xs={3} className={classes.textField}>
@@ -65,7 +73,7 @@ const ServiceProvMain = inject('user')(observer((props) => {
                         id="standard-basic"
                         value={value}
                         onChange={handleType}
-                        label={`Seacrh By ${key}`}
+                        label={`Seacrh`}
                         disabled={!key}
                     />
                     <datalist id="standard-basic">
@@ -91,8 +99,11 @@ const ServiceProvMain = inject('user')(observer((props) => {
                             }
                         }}
                     >
-                            <MenuItem value='firstName'>Name</MenuItem >
+                            <MenuItem value='firstName'>First Name</MenuItem >
+                            <MenuItem value='lastName'>Last Name</MenuItem >
+                            <MenuItem value='type'>Type</MenuItem >
                             <MenuItem value='email'>Email</MenuItem >
+                            <MenuItem value='phone'>Phone</MenuItem >
                     </TextField>
                 </Grid>
             </Grid>
