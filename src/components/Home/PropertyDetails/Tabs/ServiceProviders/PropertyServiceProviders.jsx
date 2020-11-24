@@ -96,7 +96,7 @@ const PropertyServiceProviders = inject('user')(observer((props) => {
                 </Grid>
             </Hidden>
             <Hidden smDown implementation="css">
-            <Grid 
+                <Grid 
                     item 
                     xs={12} 
                     container 
@@ -157,7 +157,7 @@ const PropertyServiceProviders = inject('user')(observer((props) => {
             </Snackbar>
             <Snackbar open={alert.delete} autoHideDuration={6000} onClose={() => setAlert({...alert, delete: false})}>
                 <Alert onClose={() => setAlert({...alert, delete: false})} severity="info">
-                Service Provider has been successfully removed!
+                    Service Provider has been successfully removed!
                 </Alert>
             </Snackbar>
         </Fragment>

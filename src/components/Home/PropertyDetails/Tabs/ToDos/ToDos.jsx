@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         height: '55vh',
         paddingBottom: 10,
         paddingRight: 5,
-        overflow: 'scroll',
+        overflow: 'auto',
         [theme.breakpoints.up('md')]: {
             padding: 10,
         }
