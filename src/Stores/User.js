@@ -333,11 +333,23 @@ export default class User {
     updateBooking = async (bookingId, bookingDetails) => {
         const booking = this.properties.find(p => p.booking.find(b => b.id === bookingId))
             .booking.find(b => b.id === bookingId)
+        const lastPropertyId = booking.property
         if (this.type.id === 1) {
             await UserService().updateBookingDetails(bookingId, bookingDetails)
             for (let b in bookingDetails) {
                 const newKey = b === 'start_date' ? 'startDate' : b === "end_date" ? 'endDate' : b
                 booking[newKey] = bookingDetails[b]
+            }
+            if(bookingDetails.property){
+                let lastProperty = this.properties.find(p => p.id === lastPropertyId).booking
+                for(var i in lastProperty){
+                    if(lastProperty[i].id === booking.id){
+                        lastProperty.splice(i,1);
+                        break;
+                    }
+                }
+                const newProperty = this.properties.find(p => p.id === bookingDetails.property).booking
+                newProperty.push(booking)
             }
         }
     };
