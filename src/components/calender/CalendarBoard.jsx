@@ -60,7 +60,14 @@ const Calendar = inject('user')(observer((props) => {
       await user.addNewBooking(added)
     }
     if (changed) {
-      const id = booking.find(b => changed[b.id]).id
+      const changedBooking = booking.find(b => changed[b.id])
+      let id
+      if(changedBooking){
+        id = changedBooking.id
+      }else{
+        alert('eror')
+        return
+      }
       changed = changed[id]
       const bookingToDB = {}
       for (let key in changed) {
@@ -109,11 +116,11 @@ const Calendar = inject('user')(observer((props) => {
         <MonthView /> :
         format === "week" ?
         <WeekView
-            startDayHour={8}
+            startDayHour={7}
             endDayHour={20}
           />:
         <DayView
-          startDayHour={8}
+          startDayHour={7}
           endDayHour={20}
         />}
 

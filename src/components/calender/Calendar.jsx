@@ -51,7 +51,6 @@ const Calendar = inject('user')(observer((props) => {
                 xs={12}
             >
                 <Typography variant='h5' className={classes.title}>
-                    All properties
                     <TextField
                         id="format"
                         select
@@ -69,7 +68,7 @@ const Calendar = inject('user')(observer((props) => {
                                 daily
                         </MenuItem>
                     </TextField>
-                     Schedule
+                     Properties Schedule
         </Typography>
             </Grid>
             <CalendarBoard booking={booking} fetchBooking={fetchBooking} format={format} />
