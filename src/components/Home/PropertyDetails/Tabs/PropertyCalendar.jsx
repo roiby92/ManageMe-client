@@ -45,6 +45,22 @@ const PropertyCalendar = inject('user')(observer((props) => {
 
     useEffect(fetchBooking, [])
 
+    const fakeBooking = [
+        {
+          channel: null,
+          color: "#3498db",
+          email: "undefined",
+          endDate: "2020-11-27T13:05",
+          guests: 1,
+          id: 84,
+          name: "fake",
+          phone: "undefined",
+          property: 44,
+          startDate: "2020-11-27T12:00",
+          title: "fake"
+        }
+      ]
+
     // const makeTodayAppointment = (startDate, endDate) => {
     //     const diff = moment(endDate).diff(moment(startDate), "days")
     //     const meetings = []

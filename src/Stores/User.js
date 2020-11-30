@@ -37,21 +37,26 @@ export default class User {
             email: observable,
             phone: observable,
             dateJoin: observable,
+            type: observable,
             properties: observable,
             serviceWorkers: observable,
+            allTodos: observable,
             userHasAuthenticated: action,
             loadUserDetails: action,
             loadUserProperties: action,
             loadProperteisTodos: action,
             loadPropertiesWorkers: action,
+            loadProperteisBooking: action,
             loadUserTypes: action,
             loadUserServiceProviders: action,
             getOwnerList: action,
             getMostBookingForUser: action,
             getAllTodoStatus: action,
             addNewUserType: action,
+            addNewUser: action,
             addNewProperty: action,
             addNewTodo: action,
+            addNewBooking: action,
             addNewServiceProperty: action,
             addNewManagerEmployee: action,
             addNewMessage: action,
@@ -59,8 +64,10 @@ export default class User {
             updatePropertyDetails: action,
             updateTodoDetails: action,
             updateTodoStatus: action,
+            updateBooking: action,
             deleteProperty: action,
             deleteTodo: action,
+            deleteBooking: action,
             deleteServiceWorkerFromProperty: action,
             deleteServiceWorkerFromUser: action,
             loadUserAllTodos: action,
@@ -278,6 +285,7 @@ export default class User {
             const property = this.properties.find(p => p.id === bookingDetails.property)
             bookingDetails.id = await UserService().addNewBooking(bookingDetails)
             property.booking.push(new Booking(bookingDetails))
+            console.log(property.booking);
             return bookingDetails.id
         }
         else {
@@ -286,7 +294,9 @@ export default class User {
     };
     addNewMessage = (userId, message) => {
         const getter = this.serviceWorkers.find(sw => sw.id === userId)
-        if(!getter.messages.some(m => m.id === message.id)){
+        if(!message.id){
+            getter.messages.push({...message, date: moment().format()})
+        }else if(!getter.messages.some(m => m.id === message.id)){
             getter.messages.push({...message, date: moment().format()})
         }
     };

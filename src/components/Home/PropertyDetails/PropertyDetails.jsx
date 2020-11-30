@@ -9,8 +9,7 @@ import {
     Divider,
     Tabs,
     Tab,
-    Button,
-    Hidden
+    Button
 } from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
 import ToDos from './Tabs/ToDos/ToDos';
@@ -24,37 +23,28 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         paddingTop: '5px',
-        overflow: 'scroll',
         [theme.breakpoints.up('md')]: {
-            marginLeft: 40,
-            overflow: 'visible',
+            marginLeft: 40
         },
-        height: '82vh'
+        height: '100%'
     },
     cardHead: {
         marginBottom: '10px',
         display: 'flex',
-        justifyContent: 'space-between',
-        display: 'grid',
-        gridTemplateColumns: '60% 40%',
-        gridGap: '10px',
+        justifyContent: 'space-between'
     },
     img: {
-        width: '150px',
         height: '100px',
+        width: '150px',
         borderRadius: '5px',
-        boxShadow: '0px 0px 3px black',
-        [theme.breakpoints.up('md')]: {
-            width: '150px',
-            height: '100px'
-        },
+        boxShadow: '0px 0px 3px black'
     },
     deleteButton: {
         color: '#fb8500',
         fontSize: '0.7em'
     },
     cardDetails: {
-        marginTop: '15px',
+        marginTop: '15px'
     },
     detailsContainer: {
         marginBottom: '10px'
@@ -93,90 +83,73 @@ const PropertyDetails = inject('user')(observer((props) => {
             <Grid item xs={12} container className={classes.detailsContainer}>
                 <Card className={classes.root}>
                     <CardContent>
-                        <Grid item xs={12} container direction='row' className={classes.cardHead} alignItems='flex-end'> 
-                            <Grid item xs={12}>
+                        <Grid item xs={12} container direction='row' className={classes.cardHead} alignItems='flex-end'>
+                            <Grid item xs={7}>
                                 <Typography variant='h5'>
                                     {property.name}
                                 </Typography>
                                 <Typography variant='body2'>
                                     {property.address}
                                 </Typography>
-                                <Button className={classes.deleteButton} size='small' onClick={handleDelete}>DELETE PROPERTY</Button> 
-                            </Grid> 
-                            <Grid item xs={12} container justify='flex-end'>
+                                <Button className={classes.deleteButton} size='small' onClick={handleDelete}>DELETE PROPERTY</Button>
+                            </Grid>
+                            <Grid item xs={5} container justify='flex-end'>
                                 <CardMedia
                                     component="img"
-                                    alt={property.name}
+                                    alt="Contemplative Reptile"
                                     className={classes.img}
                                     image={property.img}
-                                    title={property.name}
+                                    title="Contemplative Reptile"
                                 />
                             </Grid>
                         </ Grid>
                         <Divider />
-                        <Hidden mdUp implementation="css">
-                            <Tabs
-                                value={value}
-                                onChange={handleChange}
-                                indicatorColor="primary"
-                                textColor="primary"
-                                variant="scrollable"
-                                aria-label="full width tabs example"
-                            >
-                                <Tab label="Details" {...a11yProps(0)} />
-                                <Tab label="Calendar" {...a11yProps(1)} />
-                                <Tab label="To Dos" {...a11yProps(2)} />
-                                <Tab label="Service Providers" {...a11yProps(3)} />
-                            </Tabs>
-                        </Hidden>
-                        <Hidden smDown implementation="css">
                         <Tabs
-                                value={value}
-                                onChange={handleChange}
-                                indicatorColor="primary"
-                                textColor="primary"
-                                variant="fullWidth"
-                                aria-label="full width tabs example"
-                            >
-                                <Tab label="Details" {...a11yProps(0)} />
-                                <Tab label="Calendar" {...a11yProps(1)} />
-                                <Tab label="To Dos" {...a11yProps(2)} />
-                                <Tab label="Service Providers" {...a11yProps(3)} />
-                            </Tabs>
-                        </Hidden>
-                        <Grid 
+                            value={value}
+                            onChange={handleChange}
+                            indicatorColor="primary"
+                            textColor="primary"
+                            variant="fullWidth"
+                            aria-label="full width tabs example"
+                        >
+                            <Tab label="Details" {...a11yProps(0)} />
+                            <Tab label="Calendar" {...a11yProps(1)} />
+                            <Tab label="To Dos" {...a11yProps(2)} />
+                            <Tab label="Service Providers" {...a11yProps(3)} />
+                        </Tabs>
+                        <Grid
                             hidden={value !== 0}
-                            item 
-                            xs={12} 
+                            item
+                            xs={12}
                             className={classes.cardDetails}
                         >
                             <DetailsCard property={property} />
                         </Grid>
-                        <Grid 
+                        <Grid
                             hidden={value !== 1}
-                            item 
-                            xs={12} 
+                            item
+                            xs={12}
                             className={classes.cardDetails}
                         >
                             <PropertyCalendar value={value} bookings={property.booking}/>
                         </Grid>
-                        <Grid 
+                        <Grid
                             hidden={value !== 2}
-                            item 
-                            xs={12} 
+                            item
+                            xs={12}
                             className={classes.cardDetails}
                         >
                             <ToDos toDos={property.todoList} property={property} />
                         </Grid>
-                        <Grid 
+                        <Grid
                             hidden={value !== 3}
-                            item 
-                            xs={12} 
+                            item
+                            xs={12}
                             className={classes.cardDetails}
                         >
                             <PropertyServiceProviders property={property}/>
-                        </Grid>           
-                    </CardContent> 
+                        </Grid>
+                    </CardContent>
                 </Card>
             </Grid>
         )}
