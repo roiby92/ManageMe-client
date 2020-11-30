@@ -22,7 +22,8 @@ const Calendar = inject('user')(observer((props) => {
 
     const fetchBooking = () => {
         const newBooking = []
-        const colors = ['#FFC107', '#3498db', '#2ecc71', '#9b59b6', '#e74c3c', '#34495e', '#FC427B', '#7f8c8d', '#BDC581', '#e67e22']
+        // const colors = ['#FFC107', '#3498db', '#2ecc71', '#9b59b6', '#e74c3c', '#34495e', '#FC427B', '#7f8c8d', '#BDC581', '#e67e22']
+        const colors = ['#FEA47F', '#25CCF7', '#EAB543', '#55E6C1', '#CAD3C8', '#F97F51', '#1B9CFC', '#F8EFBA', '#58B19F', '#2C3A47', '#B33771', '#3B3B98', '#FD7272', '#9AECDB', '#D6A2E8', '#6D214F', '#182C61', '#FC427B', '#BDC581', '#82589F']
         user.properties.forEach((p, i) => {
             p.booking.forEach(({startDate, endDate, ...b}) => {
                 newBooking.push({

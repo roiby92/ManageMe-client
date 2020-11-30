@@ -14,10 +14,10 @@ export default class Property {
         this.wifi = property.wifi ? true : false
         this.kitchen = property.kitchen ? true : false
         this.owner = {
-            id: property.ownerId, 
-            name: property.ownerName, 
-            phone: property.phone, 
-            country: property.country, 
+            id: property.ownerId,
+            name: property.ownerName,
+            phone: property.phone,
+            country: property.country,
             email: property.email
         }
         this.todoList = []
@@ -35,7 +35,6 @@ export default class Property {
             pool: observable,
             ac: observable,
             wifi: observable,
-            pool: observable,
             kitchen: observable,
             owner: observable,
             serviceWorkers: observable,

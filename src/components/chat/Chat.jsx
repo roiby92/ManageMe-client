@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import React, { useEffect, useState } from 'react'
 import socketIOClient from "socket.io-client";
 import moment from 'moment'
+import ChatCard from "./ChatCard"
 const ENDPOINT = "http://localhost:3001";
 
 
@@ -28,10 +29,10 @@ const useStyles = makeStyles((theme) => ({
     },
     messages: {
         [theme.breakpoints.up('md')]: {
-            height: 450,      
+            height: 450,
         },
         [theme.breakpoints.up('xl')]: {
-            height: 600,      
+            height: 600,
         },
         padding: '10px',
         overflowY:'scroll'
@@ -61,7 +62,16 @@ const useStyles = makeStyles((theme) => ({
     date: {
         fontSize: '0.55rem',
         color: '#505050'
-    }
+    },
+    chatBox: {
+        [theme.breakpoints.up('md')]: {
+            height: 550,
+        },
+        [theme.breakpoints.up('xl')]: {
+            height: 700,
+        },
+        overflowY:'scroll'
+    },
 }))
 
 const Chat = inject('user')(observer((props) => {
@@ -85,21 +95,27 @@ const Chat = inject('user')(observer((props) => {
         elem.scrollTop = elem.scrollHeight;
     })
 
+    const handleClick = (newGetter) => {
+        setMsg({...msg, getter: newGetter})
+    }
+
     const handleSend = async () => {
         await socket.emit('send', msg)
         await user.addNewMessage(msg.getter, msg)
-        await setMsg({...msg, text: ''})
+        setMsg({...msg, text: ''})
         const elem = document.getElementById('messagnger')
         elem.scrollTop = elem.scrollHeight;
+        // var win = window.open(`https://wa.me/972523896679?text=${msg.text}`, '_blank');
+        // win.focus();
     }
 
     return (
         <Grid
-            item
+            container
             xs={12}
             className={classes.container}
         >
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <TextField
                     id="outlined-select-currency"
                     select
@@ -122,8 +138,8 @@ const Chat = inject('user')(observer((props) => {
                             </MenuItem>
                         ))}
                 </TextField>
-            </Grid>
-            <Grid item xs={12}>
+            </Grid> */}
+            <Grid item xs={8}>
                 <Card className={classes.cardMessage}>
                     <Paper className={classes.messages} id='messagnger'>
                         {msg.getter &&
@@ -131,16 +147,16 @@ const Chat = inject('user')(observer((props) => {
                                 .find(s => s.id === msg.getter)
                                 .messages
                                     .map(m =>
-                                        <Grid 
-                                            item 
-                                            xs={12} 
-                                            container 
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            container
                                             justify= {m.sender !== user.id && 'flex-end' }
                                         >
                                                 <div
                                                     className={`${classes.msg}
-                                                        ${m.sender === user.id 
-                                                            ? classes.User 
+                                                        ${m.sender === user.id
+                                                            ? classes.User
                                                             : classes.Else}
                                                         `}
                                                 >
@@ -166,16 +182,22 @@ const Chat = inject('user')(observer((props) => {
                                 />
                             </Grid>
                             <Grid item xs={2}>
-                                <Button 
-                                    onClick={handleSend} 
+                                <Button
+                                    onClick={handleSend}
                                     variant='contained'
                                     className={classes.sendButton}
+                                    disabled={!msg.getter}
                                 >
                                     Send
                                 </Button>
                             </Grid>
                     </Grid>
                 </Card>
+            </Grid>
+            <Grid item xs={4}>
+                <Paper className={classes.chatBox}>
+                    {user.serviceWorkers.map(s => <ChatCard details={s} handleClick={handleClick} />)}
+                </Paper>
             </Grid>
         </Grid >
     )

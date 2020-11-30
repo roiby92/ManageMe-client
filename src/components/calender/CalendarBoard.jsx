@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Paper from '@material-ui/core/Paper';
 import { ViewState, EditingState } from '@devexpress/dx-react-scheduler';
 import {
@@ -61,14 +61,12 @@ const Calendar = inject('user')(observer((props) => {
     }
     if (changed) {
       const changedBooking = booking.find(b => changed[b.id])
-      let id
       if(changedBooking){
-        id = changedBooking.id
+        changed = changed[changedBooking.id]
       }else{
         alert('eror')
         return
       }
-      changed = changed[id]
       const bookingToDB = {}
       for (let key in changed) {
         const newKey = key === 'startDate' ? 'start_date' : key === 'endDate' ? "end_date" : key
@@ -80,13 +78,13 @@ const Calendar = inject('user')(observer((props) => {
       if(changed.title){
       bookingToDB.name = changed.title === "Booking" ? bookingToDB.name : changed.title
       }
-      await user.updateBooking(id, bookingToDB);
+      await user.updateBooking(changedBooking.id, bookingToDB);
     }
     if (deleted !== undefined) {
       await user.deleteBooking(deleted)
     }
     fetchBooking()
-    return { booking };
+    // return { booking };
   }
 
   return (
@@ -142,7 +140,7 @@ const Calendar = inject('user')(observer((props) => {
           messages={{ moreInformationLabel: '' }}
         />
       </Scheduler>
-    </Paper>
+  </Paper>
   )
 }))
 export default Calendar

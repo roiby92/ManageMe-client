@@ -8,10 +8,10 @@ const PropertiesDropDown = inject('user')(observer((props) => {
   const { onCustomFieldChange } = props
   const { appointmentData } = props
 
-  const route = localStorage.currentRoute
+  const route = localStorage.currentRoute.split('/')
   const propertyId = parseInt(route[route.length - 1])
-  
-  properties = route !== "/home/calendar" ? properties.filter(p => p.id === propertyId) : properties
+
+  properties = propertyId ? properties.filter(p => p.id === propertyId) : properties
 
   return (
     <AppointmentForm.TextEditor

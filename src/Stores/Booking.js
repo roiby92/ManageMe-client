@@ -18,9 +18,9 @@ export default class Booking {
             endDate: observable,
             guests: observable,
             channel: observable,
+            name: observable,
             phone: observable,
             email: observable,
-            name: observable,
             property: observable
         })
     }
